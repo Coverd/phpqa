@@ -10,3 +10,7 @@ RUN docker-php-ext-install bcmath \
 RUN apk add --no-cache autoconf build-base libmemcached-dev php7-pecl-memcached \
 && pecl install memcached \
 && docker-php-ext-enable memcached
+
+RUN apk add --no-cache rabbitmq-c-dev php7-pecl-amqp \
+&& pecl install amqp \
+&& docker-php-ext-enable amqp
