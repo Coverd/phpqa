@@ -14,3 +14,6 @@ RUN apk add --no-cache autoconf build-base libmemcached-dev php7-pecl-memcached 
 RUN apk add --no-cache rabbitmq-c-dev php7-pecl-amqp \
 && pecl install amqp \
 && docker-php-ext-enable amqp
+
+RUN pecl install apcu \
+&& docker-php-ext-enable apcu
