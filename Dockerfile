@@ -7,7 +7,7 @@ RUN apk add --no-cache icu-dev \
 RUN docker-php-ext-install bcmath \
 && docker-php-ext-install sockets
 
-RUN apk add --no-cache autoconf build-base libmemcached-dev php7-pecl-memcached \
+RUN apk add --no-cache autoconf build-base libmemcached-dev php7-pecl-memcached openssh \
 && pecl install memcached \
 && docker-php-ext-enable memcached
 
