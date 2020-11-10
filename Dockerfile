@@ -17,3 +17,6 @@ RUN apk add --no-cache rabbitmq-c-dev php7-pecl-amqp \
 
 RUN pecl install apcu \
 && docker-php-ext-enable apcu
+
+RUN pecl install redis \
+&& docker-php-ext-enable redis
