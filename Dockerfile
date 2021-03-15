@@ -1,19 +1,20 @@
-FROM jakzal/phpqa:php8.0-alpine
+FROM jakzal/phpqa:php8.0
 
-RUN apk add --no-cache icu-dev \
+RUN apt-get update \
+#&& apt-get install -y --no-install-recommends icu-dev autoconf build-base libmemcached-dev php8-pecl-memcached openssh rabbitmq-c-dev php8-pecl-amqp \
+&& apt-get install -y --no-install-recommends apt-utils autoconf g++ gcc libmemcached-dev librabbitmq-dev pkg-config \
+&& rm -rf /var/lib/apt/lists/* \
 && docker-php-ext-configure intl \
 && docker-php-ext-install intl
 
 RUN docker-php-ext-install bcmath \
 && docker-php-ext-install sockets
 
-RUN apk add --no-cache autoconf build-base libmemcached-dev php8-pecl-memcached openssh \
-&& pecl install memcached \
+RUN pecl install memcached \
 && docker-php-ext-enable memcached
 
-RUN apk add --no-cache rabbitmq-c-dev php8-pecl-amqp \
-&& pecl install amqp \
-&& docker-php-ext-enable amqp
+#RUN pecl install amqp \
+#&& docker-php-ext-enable amqp
 
 RUN pecl install apcu \
 && docker-php-ext-enable apcu
