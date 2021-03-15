@@ -13,8 +13,19 @@ RUN docker-php-ext-install bcmath \
 RUN pecl install memcached \
 && docker-php-ext-enable memcached
 
+# Those lines are not working as the latest AMQP release is not compatible with PHP8
 #RUN pecl install amqp \
 #&& docker-php-ext-enable amqp
+
+# That's why we use the latest version available on master
+# @See https://github.com/php-amqp/php-amqp/issues/386#issuecomment-778648945
+RUN apt-get update \
+&& apt-get install -y -f librabbitmq-dev libssh-dev \
+&& docker-php-source extract \
+&& mkdir /usr/src/php/ext/amqp \
+&& curl -L https://github.com/php-amqp/php-amqp/archive/master.tar.gz | tar -xzC /usr/src/php/ext/amqp --strip-components=1 \
+&& docker-php-ext-install amqp \
+&& docker-php-ext-enable amqp
 
 RUN pecl install apcu \
 && docker-php-ext-enable apcu
