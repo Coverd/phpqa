@@ -8,4 +8,4 @@ Docker image is available on [Docker hub](https://hub.docker.com/repository/dock
 
 1. Build the image
 
-    docker build --rm .
+    docker build --tag coverd_phpqa_test --rm .
