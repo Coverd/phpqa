@@ -20,3 +20,5 @@ RUN pecl install apcu \
 
 RUN pecl install redis \
 && docker-php-ext-enable redis
+
+RUN composer global bin phpstan require jangregor/phpstan-prophecy
